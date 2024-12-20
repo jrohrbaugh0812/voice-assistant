@@ -1,5 +1,6 @@
 import pyttsx3
 import random
+import webbrowser
 from intents import get_intent
 from utils import get_time
 
@@ -13,9 +14,15 @@ def tell_time():
     return "The time is: " + get_time()
 
 
+def open_default_browser():
+    url = "https://google.com"
+    webbrowser.open(url)
+
+
 COMMANDS = {
     "greeting": greet,
     "time_query": tell_time,
+    "browser": open_default_browser,
 }
 
 
