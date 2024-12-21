@@ -1,5 +1,6 @@
 import pyttsx3
 import random
+import os
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 import webbrowser
@@ -25,9 +26,17 @@ def open_default_browser():
 
 def open_file_explorer():
     tk.Tk().withdraw()
+    file_path = askopenfilename()  # Open file dialog
+    if file_path:
+        os.startfile(file_path)  # Open the selected file
+        return f"Opening file: {file_path}"
+    else:
+        return "No file was selected."
 
-    fn = askopenfilename()
-    return "user chose" + fn
+
+def quit_program():
+    regards = ["Goodbye, have a nice day!", "Have a good day!", "Bye, have a great day!"]
+    return random.choice(regards)
 
 
 COMMANDS = {
@@ -35,6 +44,7 @@ COMMANDS = {
     "time_query": tell_time,
     "browser": open_default_browser,
     "file_explorer": open_file_explorer,
+    "end": quit_program,
 }
 
 
@@ -46,3 +56,5 @@ def respond(user_text):
     engine = pyttsx3.init()
     engine.say(response)
     engine.runAndWait()
+    if intent == "end":
+        exit()
