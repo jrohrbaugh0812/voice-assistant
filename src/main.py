@@ -6,7 +6,8 @@ if __name__ == "__main__":
     print("Voice Assistant Started")
     text = 'something'
     while text:
-        text = recognize_speech()
-        if text:
-            respond(text)
+        if keyboard.is_pressed("ctrl") and keyboard.is_pressed("shift") and keyboard.is_pressed("space"):
+            text = recognize_speech()
+            if text:
+                respond(text)
 

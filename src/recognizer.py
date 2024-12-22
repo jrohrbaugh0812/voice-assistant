@@ -19,7 +19,7 @@ def recognize_speech():
 
         print("Listening...")
         try:
-            audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)
+            audio = recognizer.listen(source, timeout=3, phrase_time_limit=5)
             print("Processing audio...")
             text = recognizer.recognize_google(audio)
             print(f"You said: {text}")
