@@ -1,6 +1,6 @@
 from recognizer import recognize_speech
 from responder import respond
-
+import keyboard
 
 if __name__ == "__main__":
     print("Voice Assistant Started")

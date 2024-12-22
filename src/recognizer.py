@@ -16,16 +16,18 @@ def recognize_speech():
     with sr.Microphone() as source:
         print("Adjusting for ambient noise...")
         recognizer.adjust_for_ambient_noise(source, duration=1)
+
         print("Listening...")
-        audio = recognizer.listen(source)
-
-    try:
-        text = recognizer.recognize_google(audio)
-        print(f"You said: {text}")
-        return text
-
-    except sr.UnknownValueError:
-        print(fallback_response())
-    except sr.RequestError:
-        print("Sorry, there was an error with the request.")
+        try:
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)
+            print("Processing audio...")
+            text = recognizer.recognize_google(audio)
+            print(f"You said: {text}")
+            return text
+        except sr.UnknownValueError:
+            print("Sorry, I didn't catch that.")
+        except sr.RequestError as e:
+            print(f"Request error: {e}")
+        except sr.WaitTimeoutError:
+            print("Timeout: No speech detected.")
     return None
