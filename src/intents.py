@@ -1,25 +1,25 @@
 import spacy
+import re
 
 nlp = spacy.load("en_core_web_sm")
 
+# Intent mapping with keywords or patterns
+INTENT_PATTERNS = {
+    "greeting": [r"\bhello\b", r"\bhi\b", r"\bhey\b", r"good (morning|afternoon|evening)"],
+    "time_query": [r"\bwhat time\b", r"\bcurrent time\b", r"\btell me the time\b", r"\bclock\b"],
+    "browser": [r"open.*browser", r"launch.*browser"],
+    "file_explorer": [r"open.*file explorer", r"launch.*file explorer"],
+    "end": [r"\bbye\b", r"\bend\b", r"\bquit\b", r"\bexit\b", r"\bgoodbye\b", r"\blater\b"],
+}
+
 
 def get_intent(user_text):
-    doc = nlp(user_text)
     user_text = user_text.lower()
 
-    greetings = ["hello", "hi", "hey", "good morning", "good afternoon", "good evening"]
-    time_queries = ["time", "clock", "what time", "current time", "tell me the time"]
-    application_queries = ["browser", "file explorer"]
-    endings = ["bye", "end", "quit", "exit", "goodbye", "later"]
-
-    for token in doc:
-        if any(greet in user_text for greet in greetings):
-            return "greeting"
-        elif any(time_query in user_text for time_query in time_queries):
-            return "time_query"
-        elif any(query in user_text for query in application_queries):
-            return "browser" if "browser" in user_text else "file_explorer"
-        elif any(ending in user_text for ending in endings):
-            return "end"
+    # Check for matches in the INTENT_PATTERNS dictionary
+    for intent, patterns in INTENT_PATTERNS.items():
+        for pattern in patterns:
+            if re.search(pattern, user_text):
+                return intent
 
     return "unknown"
