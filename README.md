@@ -1,6 +1,9 @@
 # Voice Assistant
 Voice Assistant is a Python-powered voice assistant for PCs, designed to recognize spoken commands, provide spoken responses, and execute relevant actions. The project is being actively developed to add new functionality and features and improve accuracy.
 
+> 🚧 **Work in Progress**  
+> This project is actively being developed and is not yet complete.
+
 ## Current Features
 - Voice Recognition: Accurately recognizes spoken commands using a speech recognition library.
 - Command Execution: Responds to specific intents such as:
