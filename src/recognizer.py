@@ -10,16 +10,17 @@ def fallback_response():
     ])
 
 
-def recognize_speech():
+def _capture_speech(prompt="Listening...", timeout=3, phrase_time_limit=5):
+    # Helper function to capture speech with customization.
     recognizer = sr.Recognizer()
 
     with sr.Microphone() as source:
         print("Adjusting for ambient noise...")
         recognizer.adjust_for_ambient_noise(source, duration=1)
 
-        print("Listening...")
+        print(prompt)
         try:
-            audio = recognizer.listen(source, timeout=3, phrase_time_limit=5)
+            audio = recognizer.listen(source, timeout=timeout, phrase_time_limit=phrase_time_limit)
             print("Processing audio...")
             text = recognizer.recognize_google(audio)
             print(f"You said: {text}")
@@ -31,3 +32,13 @@ def recognize_speech():
         except sr.WaitTimeoutError:
             print("Timeout: No speech detected.")
     return None
+
+
+def recognize_speech():
+    # Default speech recognizer for general commands.
+    return _capture_speech(prompt="Listening...")
+
+
+def recognize_save_note():
+    # Specialized speech recognizer for saving notes.
+    return _capture_speech(prompt="What would you like to save?", timeout=5, phrase_time_limit=10)
