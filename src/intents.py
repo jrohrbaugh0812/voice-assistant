@@ -9,6 +9,7 @@ INTENT_PATTERNS = {
     "time_query": [r"\bwhat time\b", r"\bcurrent time\b", r"\btell me the time\b", r"\bclock\b"],
     "browser": [r"open.*browser", r"launch.*browser"],
     "file_explorer": [r"open.*file explorer", r"launch.*file explorer"],
+    "note": [r"\bsave note\b", r"\bremember this\b", r"\bsave this\b"],
     "end": [r"\bbye\b", r"\bend\b", r"\bquit\b", r"\bexit\b", r"\bgoodbye\b", r"\blater\b"],
 }
 

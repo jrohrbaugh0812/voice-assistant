@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter.filedialog import askopenfilename
 import webbrowser
 from intents import get_intent
+from recognizer import recognize_save_note
 from utils import get_time
 
 
@@ -34,6 +35,14 @@ def open_file_explorer():
         return "No file was selected."
 
 
+def save_note():
+    note = recognize_save_note()
+    file = open("my_notes.txt", "w")
+    file.write(note + "\n")
+    file.close()
+    return "Your note has been saved in \"my_notes.txt\""
+
+
 def quit_program():
     regards = ["Goodbye, have a nice day!", "Have a good day!", "Bye, have a great day!"]
     return random.choice(regards)
@@ -44,6 +53,7 @@ COMMANDS = {
     "time_query": tell_time,
     "browser": open_default_browser,
     "file_explorer": open_file_explorer,
+    "note": save_note,
     "end": quit_program,
 }
 
