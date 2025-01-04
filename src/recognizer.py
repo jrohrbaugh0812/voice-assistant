@@ -42,3 +42,29 @@ def recognize_speech():
 def recognize_save_note():
     # Specialized speech recognizer for saving notes.
     return _capture_speech(prompt="What would you like to save?", timeout=5, phrase_time_limit=10)
+
+
+def recognize_sender_email_address():
+    # Specialized speech recognizer for getting the user's email.
+    return _capture_speech(prompt="What is your email address?", timeout=5, phrase_time_limit=10)
+
+
+def recognize_email_password():
+    # Specialized speech recognizer for getting the password of the user.
+    return _capture_speech(prompt="What is your password?", timeout=5, phrase_time_limit=5)
+
+
+def recognize_receiver_email_address():
+    # Specialized speech recognizer for getting the user's email.
+    return _capture_speech(prompt="What is the email address you want to contact?", timeout=5, phrase_time_limit=10)
+
+
+def recognize_email_subject():
+    # Specialized speech recognizer for getting the email content.
+    return _capture_speech(prompt="What would you like the subject of the email to be?", timeout=10,
+                           phrase_time_limit=30)
+
+
+def recognize_email_body():
+    # Specialized speech recognizer for getting the email content.
+    return _capture_speech(prompt="What would you like the body of the email to be?", timeout=10, phrase_time_limit=15)

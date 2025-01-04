@@ -4,8 +4,12 @@ import os
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 import webbrowser
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from intents import get_intent
-from recognizer import recognize_save_note
+from recognizer import (recognize_save_note, recognize_sender_email_address, recognize_email_password,
+                        recognize_receiver_email_address, recognize_email_body, recognize_email_subject)
 from utils import get_time
 
 
@@ -43,6 +47,37 @@ def save_note():
     return "Your note has been saved in \"my_notes.txt\""
 
 
+def send_email():
+    sender_email_address = input("What is your email address?")
+    password = input("What is your password")
+    receiver_email_address = input("What is the email address you want to contact?")
+    input_type = input("Do you want to type OR speak the subject and body contents?")
+    if input_type == "type":
+        email_subject = input("What would you like the subject of the email to be?")
+        email_body = input("What would you like the body of the email to be?")
+    elif input_type == "speak":
+        email_subject = recognize_email_subject()
+        email_body = recognize_email_body()
+    else:
+        return "Invalid input type"
+
+    msg = MIMEMultipart()
+    msg["From"] = sender_email_address
+    msg["To"] = receiver_email_address
+    msg["Subject"] = email_subject
+    msg.attach(MIMEText(email_body, "plain"))
+
+    # Sending the email (i.e., "msg")
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()  # Secure the connection
+            server.login(sender_email_address, password)  # Login to the server
+            server.sendmail(sender_email_address, receiver_email_address, msg.as_string())  # Send email
+            return "Email sent successfully."
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+
 def quit_program():
     regards = ["Goodbye, have a nice day!", "Have a good day!", "Bye, have a great day!"]
     return random.choice(regards)
@@ -54,6 +89,7 @@ COMMANDS = {
     "browser": open_default_browser,
     "file_explorer": open_file_explorer,
     "note": save_note,
+    "email": send_email,
     "end": quit_program,
 }
 
