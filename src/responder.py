@@ -8,9 +8,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from intents import get_intent
-from recognizer import (recognize_save_note, recognize_sender_email_address, recognize_email_password,
-                        recognize_receiver_email_address, recognize_email_body, recognize_email_subject)
-from utils import get_time
+from recognizer import (recognize_save_note, recognize_email_body, recognize_email_subject)
+from utils import (get_time, get_password)
 
 
 def greet():
@@ -49,7 +48,7 @@ def save_note():
 
 def send_email():
     sender_email_address = input("What is your email address?")
-    password = input("What is your password")
+    password = get_password()
     receiver_email_address = input("What is the email address you want to contact?")
     input_type = input("Do you want to type OR speak the subject and body contents?")
     if input_type == "type":
