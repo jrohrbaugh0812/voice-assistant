@@ -47,18 +47,24 @@ def save_note():
 
 
 def send_email():
-    sender_email_address = input("What is your email address?")
+    sender_email_address = input("What is your email address? ")
     password = get_password()
-    receiver_email_address = input("What is the email address you want to contact?")
-    input_type = input("Do you want to type OR speak the subject and body contents?")
+    receiver_email_address = input("What is the email address you want to contact? ")
+    input_type = input("Do you want to type OR speak the subject and body contents? (type/speak): ").lower()
     if input_type == "type":
-        email_subject = input("What would you like the subject of the email to be?")
-        email_body = input("What would you like the body of the email to be?")
+        email_subject = input("What would you like the subject of the email to be? ")
+        email_body = input("What would you like the body of the email to be? ")
     elif input_type == "speak":
         email_subject = recognize_email_subject()
         email_body = recognize_email_body()
     else:
         return "Invalid input type"
+
+    should_continue = input(f"Do you want to continue with this email? \n {sender_email_address} to "
+                            f"{receiver_email_address} \n {email_subject} \n {email_body} \n\n y/n? ").lower()
+
+    if should_continue != 'y':
+        return "Discarded email"
 
     msg = MIMEMultipart()
     msg["From"] = sender_email_address
@@ -73,6 +79,8 @@ def send_email():
             server.login(sender_email_address, password)  # Login to the server
             server.sendmail(sender_email_address, receiver_email_address, msg.as_string())  # Send email
             return "Email sent successfully."
+    except smtplib.SMTPAuthenticationError:
+        return "Authentication error. Check your email and password."
     except Exception as e:
         return f"An error occurred: {e}"
 

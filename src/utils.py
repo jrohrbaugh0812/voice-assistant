@@ -1,5 +1,5 @@
 import time
-import getpass
+from getpass import getpass
 
 
 def get_time():
@@ -7,4 +7,4 @@ def get_time():
 
 
 def get_password():
-    return getpass.getpass("What is your password?")
+    return getpass("What is your password? ")
