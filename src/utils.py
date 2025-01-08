@@ -1,5 +1,12 @@
+import pyttsx3
 import time
 from getpass import getpass
+
+
+def text_to_speech(text):
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
 
 
 def get_time():

@@ -1,4 +1,3 @@
-import pyttsx3
 import random
 import os
 import tkinter as tk
@@ -9,7 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from intents import get_intent
 from recognizer import (recognize_save_note, recognize_email_body, recognize_email_subject)
-from utils import (get_time, get_password)
+from utils import (text_to_speech, get_time, get_password)
 
 
 def greet():
@@ -47,6 +46,9 @@ def save_note():
 
 
 def send_email():
+    print("You will have to answer the following questions by typing...")
+    text_to_speech("You will have to answer the following questions by typing...")
+
     sender_email_address = input("What is your email address? ")
     password = get_password()
     receiver_email_address = input("What is the email address you want to contact? ")
@@ -75,13 +77,16 @@ def send_email():
     # Sending the email (i.e., "msg")
     try:
         with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.ehlo()
             server.starttls()  # Secure the connection
             server.login(sender_email_address, password)  # Login to the server
             server.sendmail(sender_email_address, receiver_email_address, msg.as_string())  # Send email
             return "Email sent successfully."
-    except smtplib.SMTPAuthenticationError:
+    except smtplib.SMTPAuthenticationError as auth_error:
+        print(f"Authentication error: {auth_error.smtp_code} - {auth_error.smtp_error}")
         return "Authentication error. Check your email and password."
     except Exception as e:
+        print(f"Full error: {e}")
         return f"An error occurred: {e}"
 
 
@@ -106,8 +111,6 @@ def respond(user_text):
     intent = get_intent(user_text)
     response = COMMANDS.get(intent, lambda: "I'm not sure how to respond to that.")()
     print(response)
-    engine = pyttsx3.init()
-    engine.say(response)
-    engine.runAndWait()
+    text_to_speech(response)
     if intent == "end":
         exit()
