@@ -11,6 +11,7 @@ INTENT_PATTERNS = {
     "file_explorer": [r"open.*file explorer", r"launch.*file explorer"],
     "note": [r"\bsave note\b", r"\bremember this\b", r"\bsave this\b"],
     "email": [r"\bsend email\b", "\bemail\b"],
+    "weather": [r"\bget weather\b", "\bweather\b"],
     "end": [r"\bbye\b", r"\bend\b", r"\bquit\b", r"\bexit\b", r"\bgoodbye\b", r"\blater\b"],
 }
 
