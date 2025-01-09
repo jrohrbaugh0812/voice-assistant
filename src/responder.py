@@ -91,10 +91,9 @@ def send_email():
 
 
 def get_weather():
-    lat = input("What is your latitude? ")
-    lon = input("What is your longitude? ")
+    geographical_name = input("What is the name of the city, town, or county you want weather data from? ")
 
-    data = get_forecast(lat, lon)
+    data = get_forecast(geographical_name)
 
     if "error" in data:
         return f"Error: {data['error']}"
@@ -104,7 +103,7 @@ def get_weather():
             [f"{period['name']}: {period['temperature']}°{period['temperatureUnit']}, {period['shortForecast']}"
              for period in data]
         )
-        return forecast
+        return f"Here is the forecast for {geographical_name}:\n{forecast}"
 
 
 def quit_program():
