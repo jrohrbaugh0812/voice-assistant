@@ -125,8 +125,8 @@ COMMANDS = {
     "file_explorer": open_file_explorer,
     "note": save_note,
     "email": send_email,
-    "weather": get_weather(),
-    "detailed_weather": get_weather(detailed=True),
+    "weather": get_weather,
+    "detailed_weather": lambda: get_weather(detailed=True),
     "end": quit_program,
 }
 
