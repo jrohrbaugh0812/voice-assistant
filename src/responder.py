@@ -90,20 +90,27 @@ def send_email():
         return f"An error occurred: {e}"
 
 
-def get_weather():
-    geographical_name = input("What is the name of the city, town, or county you want weather data from? ")
+def get_weather(detailed=False):
+    geographical_name = input("What is the name of the city, town, or county you want weather data from?\n ")
 
     data = get_forecast(geographical_name)
 
     if "error" in data:
         return f"Error: {data['error']}"
     else:
-        # Format the forecast data for readability
-        forecast = "\n".join(
-            [f"{period['name']}: {period['temperature']}°{period['temperatureUnit']}, {period['shortForecast']}"
-             for period in data]
-        )
-        return f"Here is the forecast for {geographical_name}:\n{forecast}"
+        if detailed:
+            # Format the forecast data for readability
+            forecast = "\n".join(
+                [f"{period['name']}: {period['temperature']}°{period['temperatureUnit']}, {period['shortForecast']}"
+                 for period in data]
+            )
+            return f"Here is the forecast for {geographical_name}:\n{forecast}"
+        else:
+            # Format the forecast data for readability
+            forecast = "\n".join(
+                [f"{period['name']}: {period["detailedForecast"]}" for period in data]
+            )
+            return f"Here is the detailed forecast for {geographical_name}:\n{forecast}"
 
 
 def quit_program():
@@ -118,7 +125,8 @@ COMMANDS = {
     "file_explorer": open_file_explorer,
     "note": save_note,
     "email": send_email,
-    "weather": get_weather,
+    "weather": get_weather(),
+    "detailed_weather": get_weather(detailed=True),
     "end": quit_program,
 }
 
