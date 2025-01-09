@@ -11,7 +11,9 @@ Voice Assistant is a Python-powered voice assistant for PCs, designed to recogni
   - Telling the current time.
   - Opening the default web browser.
   - Launching the file explorer and opening selected files.
-  - Exiting the program with a polite farewell.
+  - Saving notes to be remembered later.
+  - Fetches weather data from user-defined locations.
+  - Exiting the program with a farewell.
 - Text-to-Speech Responses: Delivers audible feedback using a text-to-speech engine.
 - Flexible Input Recognition: Adapts to variations in user input, such as different phrasings for the same command.
   
