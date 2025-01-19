@@ -13,6 +13,7 @@ INTENT_KEYWORDS = {
     "email": ["send email", "start email", "write an email"],
     "weather": ["weather", "forecast", "temperature", "rain", "sunny"],
     "detailed_weather": ["detailed weather", "specific forecast"],
+    "news": ["news", "get news", "latest news", "what is the news"],
     "end": ["bye", "quit", "exit", "goodbye", "later"],
 }
 
@@ -21,6 +22,7 @@ INTENT_PRIORITY = [
     "email",  # Prioritize actionable intents like sending an email
     "detailed_weather",  # More specific weather query comes before general weather
     "weather",
+    "news",
     "time_query",
     "browser",
     "file_explorer",

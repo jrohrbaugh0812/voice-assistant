@@ -2,6 +2,7 @@ import pyttsx3
 import time
 from getpass import getpass
 import requests
+import feedparser
 
 
 def text_to_speech(text):
@@ -67,3 +68,11 @@ def get_forecast(geographical_name):
     except KeyError as e:
         return {"error": f"Unexpected response structure: {e}"}
 
+
+def get_news():
+    feed_url = "https://feeds.bbci.co.uk/news/rss.xml"  # Feed from BBC
+    feed = feedparser.parse(feed_url)
+    news_feed = ""
+    for entry in feed.entries[:5]:  # Get the first five articles
+        news_feed += f"Title: {entry.title}\nLink: {entry.link}\n"
+    return news_feed

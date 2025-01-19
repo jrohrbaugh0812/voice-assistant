@@ -7,7 +7,7 @@ if __name__ == "__main__":
     text = 'something'
     while text:
         if keyboard.is_pressed("ctrl") and keyboard.is_pressed("shift") and keyboard.is_pressed("space"):
-            text = recognize_speech()
+            text = input("Input: ")
             if text:
                 respond(text)
 

@@ -4,3 +4,4 @@ pyaudio
 spacy
 keyboard
 requests
+feedparser
