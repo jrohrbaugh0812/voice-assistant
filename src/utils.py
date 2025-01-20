@@ -7,6 +7,10 @@ import feedparser
 
 def text_to_speech(text):
     engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id)  # Choose a different voice
+    engine.setProperty('rate', 150)  # Adjust speech rate
+    engine.setProperty('volume', 1.0)  # Adjust volume
     engine.say(text)
     engine.runAndWait()
 
