@@ -14,6 +14,7 @@ INTENT_KEYWORDS = {
     "weather": ["weather", "forecast", "temperature", "rain", "sunny"],
     "detailed_weather": ["detailed weather", "specific forecast"],
     "news": ["news", "get news", "latest news", "what is the news"],
+    "joke": ["joke", "get joke", "give me a joke", "what is a joke", "can you tell me a joke"],
     "end": ["bye", "quit", "exit", "goodbye", "later"],
 }
 
@@ -27,6 +28,7 @@ INTENT_PRIORITY = [
     "browser",
     "file_explorer",
     "note",
+    "joke",
     "end",
     "greeting",  # Generic greetings have lower priority
 ]

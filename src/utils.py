@@ -80,3 +80,14 @@ def get_news():
     for entry in feed.entries[:5]:  # Get the first five articles
         news_feed += f"Title: {entry.title}\nLink: {entry.link}\n"
     return news_feed
+
+
+def get_joke():
+    base_url = f"https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit"
+    try:
+        data = send_request(base_url)
+        return data
+    except requests.exceptions.RequestException as e:
+        return {"error": str(e)}
+    except KeyError as e:
+        return {"error": f"Unexpected response structure: {e}"}

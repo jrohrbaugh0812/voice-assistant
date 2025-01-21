@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from intents import get_intent
 from recognizer import (recognize_save_note, recognize_email_body, recognize_email_subject)
-from utils import (text_to_speech, get_time, get_password, get_forecast, get_news)
+from utils import (text_to_speech, get_time, get_password, get_forecast, get_news, get_joke)
 
 
 def greet():
@@ -117,6 +117,14 @@ def fetch_news():
     return get_news()
 
 
+def fetch_joke():
+    joke_data = get_joke()
+    if joke_data["type"] == "single":
+        return f"{joke_data["joke"]}"
+    else:
+        return f"{joke_data["setup"]}\n{joke_data["delivery"]}"
+
+
 def quit_program():
     regards = ["Goodbye, have a nice day!", "Have a good day!", "Bye, have a great day!"]
     return random.choice(regards)
@@ -132,6 +140,7 @@ COMMANDS = {
     "weather": get_weather,
     "detailed_weather": lambda: get_weather(detailed=True),
     "news": fetch_news,
+    "joke": fetch_joke(),
     "end": quit_program,
 }
 
