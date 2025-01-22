@@ -17,6 +17,8 @@ INTENT_KEYWORDS = {
     "joke": ["joke", "get joke", "give me a joke", "what is a joke", "can you tell me a joke"],
     "qr_code": ["qr", "code", "qrcode", "link", "generate qr", "generate qrcode", "make qr", "make qrcode",
                 "create qr", "create qrcode", "make me a qr", "make me a qrcode", "qr code for"],
+    "image_format": ["image format", "format of image", "change the format of this image", "change image format",
+                     "image extension"],
     "end": ["bye", "quit", "exit", "goodbye", "later"],
 }
 
@@ -27,6 +29,7 @@ INTENT_PRIORITY = [
     "weather",
     "news",
     "qr_code",
+    "image_format",
     "time_query",
     "browser",
     "file_explorer",

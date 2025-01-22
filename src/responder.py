@@ -8,7 +8,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from intents import get_intent
 from recognizer import (recognize_save_note, recognize_email_body, recognize_email_subject)
-from utils import (text_to_speech, get_time, get_password, get_forecast, get_news, get_joke, generate_qr_code)
+from utils import (text_to_speech, get_time, get_password, get_forecast, get_news, get_joke, generate_qr_code,
+                   convert_image_format)
 
 
 def greet():
@@ -150,6 +151,17 @@ def fetch_qr_code():
         return f"\nAn unexpected error occurred: {e}"
 
 
+def change_image_format():
+    tk.Tk().withdraw()
+    file_path = askopenfilename()  # Open file dialog
+    print(f"You selected: {file_path}")
+    extension = input("What extension would you like to convert this image to? ")
+    if file_path:
+        return convert_image_format(file_path, extension)
+    else:
+        return "No file was selected."
+
+
 def quit_program():
     regards = ["Goodbye, have a nice day!", "Have a good day!", "Bye, have a great day!"]
     return random.choice(regards)
@@ -167,6 +179,7 @@ COMMANDS = {
     "news": fetch_news,
     "joke": fetch_joke,
     "qr_code": fetch_qr_code,
+    "image_format": change_image_format,
     "end": quit_program,
 }
 
