@@ -119,10 +119,18 @@ def fetch_news():
 
 def fetch_joke():
     joke_data = get_joke()
-    if joke_data["type"] == "single":
-        return f"{joke_data["joke"]}"
+
+    if joke_data.get("error"):
+        return f"Sorry, I couldn't fetch a joke. Error: {joke_data['error']}"
+
+    if joke_data.get("type") == "single":
+        return f"{joke_data.get('joke', 'I couldn\'t understand the joke format.')}"
+    elif joke_data.get("type") == "twopart":
+        setup = joke_data.get("setup", "No setup found.")
+        delivery = joke_data.get("delivery", "No delivery found.")
+        return f"{setup}\n{delivery}"
     else:
-        return f"{joke_data["setup"]}\n{joke_data["delivery"]}"
+        return f"Unexpected joke format received."
 
 
 def quit_program():
@@ -140,7 +148,7 @@ COMMANDS = {
     "weather": get_weather,
     "detailed_weather": lambda: get_weather(detailed=True),
     "news": fetch_news,
-    "joke": fetch_joke(),
+    "joke": fetch_joke,
     "end": quit_program,
 }
 

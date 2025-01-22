@@ -86,6 +86,8 @@ def get_joke():
     base_url = f"https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit"
     try:
         data = send_request(base_url)
+        if data.get("error"):
+            return {"error": data["error"]}
         return data
     except requests.exceptions.RequestException as e:
         return {"error": str(e)}
