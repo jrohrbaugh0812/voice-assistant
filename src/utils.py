@@ -146,6 +146,11 @@ def convert_image_format(file_path, extension):
         # Open the image
         image = Image.open(file_path)
 
+        # Check RGB <-> RGBA
+        if current_extension in [".png", ".tiff"] and extension not in [".png", ".tiff", ".webp"]:
+            # Convert the image to 'RGB' to discard the alpha channel for formats like JPEG
+            image = image.convert("RGB")
+
         # Convert and save the image in a different format
         new_file_path = file_path.replace(current_extension, extension)
         image.save(new_file_path)

@@ -154,12 +154,13 @@ def fetch_qr_code():
 def change_image_format():
     tk.Tk().withdraw()
     file_path = askopenfilename()  # Open file dialog
-    print(f"You selected: {file_path}")
-    extension = input("What extension would you like to convert this image to? ")
-    if file_path:
-        return convert_image_format(file_path, extension)
-    else:
+    if not file_path:
         return "No file was selected."
+    print(f"You selected: {file_path}")
+
+    extension = input("What extension would you like to convert this image to? ")
+
+    return convert_image_format(file_path, extension)
 
 
 def quit_program():
