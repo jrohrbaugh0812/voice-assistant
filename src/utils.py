@@ -1,3 +1,4 @@
+import os
 import pyttsx3
 import time
 from getpass import getpass
@@ -107,9 +108,17 @@ def generate_qr_code(url, filename):
         qr.add_data(url)
         qr.make(fit=True)
 
+        # Create the folder if it doesn't exist
+        folder = "qr_codes"
+        os.makedirs(folder, exist_ok=True)
+
+        # Construct the full file path to save the image
+        file_path = os.path.join(folder, filename)
+
+        # Generate and save the QR code
         img = qr.make_image(fill_color="black", back_color="white")
-        img.save(filename)
-        return f"\nQR code save as {filename}."
+        img.save(file_path)
+        return f"\nQR code saved as {filename} to {file_path}."
     except Exception as e:
         return f"\nAn error occurred while generating the QR code: {e}"
 
