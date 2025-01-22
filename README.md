@@ -1,5 +1,5 @@
 # Voice Assistant
-Voice Assistant is a Python-powered voice assistant for PCs, designed to recognize spoken commands, provide spoken responses, and execute relevant actions. The project is being actively developed to add new functionality and features and improve accuracy.
+This project is a Python-powered voice assistant for PCs, designed to recognize spoken commands, provide spoken responses, and execute relevant actions. The project is being actively developed to add new functionality and features and improve accuracy.
 
 > 🚧 **Work in Progress**  
 > This project is actively being developed and is not yet complete.
@@ -14,6 +14,7 @@ Voice Assistant is a Python-powered voice assistant for PCs, designed to recogni
   - Saving notes to be remembered later.
   - Fetches weather data from user-defined locations.
   - Exiting the program with a farewell.
+  - And much more!
 - Text-to-Speech Responses: Delivers audible feedback using a text-to-speech engine.
 - Flexible Input Recognition: Adapts to variations in user input, such as different phrasings for the same command.
   
