@@ -9,7 +9,7 @@ INTENT_KEYWORDS = {
     "time_query": ["what time", "current time", "tell me the time", "clock"],
     "browser": ["open browser", "launch browser", "start browser"],
     "file_explorer": ["open file explorer", "launch file explorer", "explorer"],
-    "note": ["save note", "remember this", "write this down"],
+    "note": ["save note", "remember this", "write this down", "to-do"],
     "email": ["send email", "start email", "write an email"],
     "weather": ["weather", "forecast", "temperature", "rain", "sunny"],
     "detailed_weather": ["detailed weather", "specific forecast"],

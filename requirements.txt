@@ -5,3 +5,5 @@ spacy
 keyboard
 requests
 feedparser
+qrcode
+pillow
