@@ -135,11 +135,11 @@ def fetch_joke():
 
 def fetch_qr_code():
     try:
-        url = input("\nWhat is the url? ")
+        url = input("What is the url? ")
         if not url.startswith(("https://", "https://")):
             raise ValueError("Invalid URL. Make sure it starts with 'http://' or 'https://'")
 
-        filename = input("\nWhat do you want to name the QR code file (e.g., 'my_qr.png')? ")
+        filename = input("What do you want to name the QR code file (e.g., 'my_qr.png')? ")
         if not filename.endswith(".png"):
             raise ValueError("Invalid filename. The file must end with '.png'.")
 

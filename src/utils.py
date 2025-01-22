@@ -5,7 +5,7 @@ from getpass import getpass
 import requests
 import feedparser
 import qrcode
-
+from PIL import Image
 
 def text_to_speech(text):
     engine = pyttsx3.init()
@@ -118,7 +118,38 @@ def generate_qr_code(url, filename):
         # Generate and save the QR code
         img = qr.make_image(fill_color="black", back_color="white")
         img.save(file_path)
-        return f"\nQR code saved as {filename} to {file_path}."
+        return f"QR code saved as {filename} to {file_path}."
     except Exception as e:
-        return f"\nAn error occurred while generating the QR code: {e}"
+        return f"An error occurred while generating the QR code: {e}"
 
+
+def convert_image_format(file_path, extension):
+    # Define valid image extensions
+    valid_extensions = (".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp")
+
+    # Extract the current file extension
+    _, current_extension = os.path.splitext(file_path)
+
+    # Ensure extensions are case-insensitive
+    current_extension = current_extension.lower()
+    extension = extension.lower()
+
+    # Check if the current file has a valid image extension
+    if current_extension not in valid_extensions:
+        return "The selected file is not a valid image file."
+
+    # Check if the target extension is valid
+    if extension not in valid_extensions:
+        return f"The target extension is not a valid image format."
+
+    try:
+        # Open the image
+        image = Image.open(file_path)
+
+        # Convert and save the image in a different format
+        new_file_path = file_path.replace(current_extension, extension)
+        image.save(new_file_path)
+
+        return f"Image file was converted from {current_extension} to {extension} and saved as \n{new_file_path}"
+    except Exception as e:
+        return f"An error occurred during the conversion: {e}"
