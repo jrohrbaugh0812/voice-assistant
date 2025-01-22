@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from intents import get_intent
 from recognizer import (recognize_save_note, recognize_email_body, recognize_email_subject)
-from utils import (text_to_speech, get_time, get_password, get_forecast, get_news, get_joke)
+from utils import (text_to_speech, get_time, get_password, get_forecast, get_news, get_joke, generate_qr_code)
 
 
 def greet():
@@ -91,12 +91,12 @@ def send_email():
 
 
 def get_weather(detailed=False):
-    geographical_name = input("What is the name of the city, town, or county you want weather data from?\n ")
+    geographical_name = input("What is the name of the city, town, or county you want weather data from? ")
 
     data = get_forecast(geographical_name)
 
     if "error" in data:
-        return f"Error: {data['error']}"
+        return f"\nError: {data['error']}"
     else:
         if detailed:
             # Format the forecast data for readability
@@ -133,6 +133,23 @@ def fetch_joke():
         return f"Unexpected joke format received."
 
 
+def fetch_qr_code():
+    try:
+        url = input("\nWhat is the url? ")
+        if not url.startswith(("https://", "https://")):
+            raise ValueError("Invalid URL. Make sure it starts with 'http://' or 'https://'")
+
+        filename = input("\nWhat do you want to name the QR code file (e.g., 'my_qr.png')? ")
+        if not filename.endswith(".png"):
+            raise ValueError("Invalid filename. The file must end with '.png'.")
+
+        return generate_qr_code(url, filename)
+    except ValueError as ve:
+        return f"\nInput Error: {ve}"
+    except Exception as e:
+        return f"\nAn unexpected error occurred: {e}"
+
+
 def quit_program():
     regards = ["Goodbye, have a nice day!", "Have a good day!", "Bye, have a great day!"]
     return random.choice(regards)
@@ -149,6 +166,7 @@ COMMANDS = {
     "detailed_weather": lambda: get_weather(detailed=True),
     "news": fetch_news,
     "joke": fetch_joke,
+    "qr_code": fetch_qr_code,
     "end": quit_program,
 }
 

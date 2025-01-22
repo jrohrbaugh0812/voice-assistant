@@ -15,6 +15,8 @@ INTENT_KEYWORDS = {
     "detailed_weather": ["detailed weather", "specific forecast"],
     "news": ["news", "get news", "latest news", "what is the news"],
     "joke": ["joke", "get joke", "give me a joke", "what is a joke", "can you tell me a joke"],
+    "qr_code": ["qr", "code", "qrcode", "link", "generate qr", "generate qrcode", "make qr", "make qrcode",
+                "create qr", "create qrcode", "make me a qr", "make me a qrcode", "qr code for"],
     "end": ["bye", "quit", "exit", "goodbye", "later"],
 }
 
@@ -24,6 +26,7 @@ INTENT_PRIORITY = [
     "detailed_weather",  # More specific weather query comes before general weather
     "weather",
     "news",
+    "qr_code",
     "time_query",
     "browser",
     "file_explorer",

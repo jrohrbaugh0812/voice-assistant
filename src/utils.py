@@ -3,6 +3,7 @@ import time
 from getpass import getpass
 import requests
 import feedparser
+import qrcode
 
 
 def text_to_speech(text):
@@ -93,3 +94,22 @@ def get_joke():
         return {"error": str(e)}
     except KeyError as e:
         return {"error": f"Unexpected response structure: {e}"}
+
+
+def generate_qr_code(url, filename):
+    try:
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(url)
+        qr.make(fit=True)
+
+        img = qr.make_image(fill_color="black", back_color="white")
+        img.save(filename)
+        return f"\nQR code save as {filename}."
+    except Exception as e:
+        return f"\nAn error occurred while generating the QR code: {e}"
+
