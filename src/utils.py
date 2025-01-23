@@ -8,6 +8,7 @@ import qrcode
 from PIL import Image
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from comtypes import CLSCTX_ALL
+import ctypes
 
 
 def text_to_speech(text):
@@ -168,7 +169,7 @@ def adjust_volume(level=None):
     try:
         # Get the audio endpoint (default audio output device)
         devices = AudioUtilities.GetSpeakers()
-        interface = devices.Activate(interface=IAudioEndpointVolume, clsctx=CLSCTX_ALL, pUnkOuter=None)
+        interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
         volume = interface.QueryInterface(IAudioEndpointVolume)
 
         # Validate the level input and adjust volume

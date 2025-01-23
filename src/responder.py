@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from intents import get_intent
 from recognizer import (recognize_save_note, recognize_email_body, recognize_email_subject)
 from utils import (text_to_speech, get_time, get_password, get_forecast, get_news, get_joke, generate_qr_code,
-                   convert_image_format)
+                   convert_image_format, adjust_volume)
 
 
 def greet():
@@ -163,6 +163,25 @@ def change_image_format():
     return convert_image_format(file_path, extension)
 
 
+def change_volume():
+    try:
+        volume_level = input("What do you want to set your volume to? ")
+        if volume_level.endswith("%"):
+            volume_level = volume_level.replace("%", "")
+
+        # Convert the input to an integer
+        volume_level = int(volume_level)
+
+        if not (0 <= volume_level <= 100):
+            raise ValueError("Invalid volume level. The volume level must be an integer.")
+
+        return adjust_volume(volume_level)
+    except ValueError as ve:
+        return f"Input Error: {ve}"
+    except Exception as e:
+        return f"An unexpected error occurred: {e}"
+
+
 def quit_program():
     regards = ["Goodbye, have a nice day!", "Have a good day!", "Bye, have a great day!"]
     return random.choice(regards)
@@ -181,6 +200,7 @@ COMMANDS = {
     "joke": fetch_joke,
     "qr_code": fetch_qr_code,
     "image_format": change_image_format,
+    "volume": change_volume,
     "end": quit_program,
 }
 

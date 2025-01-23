@@ -19,6 +19,7 @@ INTENT_KEYWORDS = {
                 "create qr", "create qrcode", "make me a qr", "make me a qrcode", "qr code for"],
     "image_format": ["image format", "format of image", "change the format of this image", "change image format",
                      "image extension"],
+    "volume": ["change volume", "volume", "volume level", "volume amount"],
     "end": ["bye", "quit", "exit", "goodbye", "later"],
 }
 
@@ -28,6 +29,7 @@ INTENT_PRIORITY = [
     "detailed_weather",  # More specific weather query comes before general weather
     "weather",
     "news",
+    "volume",
     "qr_code",
     "image_format",
     "time_query",
