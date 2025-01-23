@@ -6,6 +6,9 @@ import requests
 import feedparser
 import qrcode
 from PIL import Image
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+from comtypes import CLSCTX_ALL
+
 
 def text_to_speech(text):
     engine = pyttsx3.init()
@@ -158,3 +161,21 @@ def convert_image_format(file_path, extension):
         return f"Image file was converted from {current_extension} to {extension} and saved as \n{new_file_path}"
     except Exception as e:
         return f"An error occurred during the conversion: {e}"
+
+
+# This function adjusts the system volume, it is not application-based.
+def adjust_volume(level=None):
+    try:
+        # Get the audio endpoint (default audio output device)
+        devices = AudioUtilities.GetSpeakers()
+        interface = devices.Activate(interface=IAudioEndpointVolume, clsctx=CLSCTX_ALL, pUnkOuter=None)
+        volume = interface.QueryInterface(IAudioEndpointVolume)
+
+        # Validate the level input and adjust volume
+        if level is not None and 0 <= level <= 100:
+            volume.SetMasterVolumeLevelScalar(level / 100, None)
+            return f"Volume successfully set to {int(level)}%"
+        else:
+            return "Error: Volume level must be between 0% and 100%"
+    except Exception as e:
+        return f"An error occurred while adjusting the volume: {e}"
