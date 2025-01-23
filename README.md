@@ -1,8 +1,10 @@
 # Voice Assistant
-This project is a Python-powered voice assistant for PCs, designed to recognize spoken commands, provide spoken responses, and execute relevant actions. The project is being actively developed to add new functionality and features and improve accuracy.
-
 > 🚧 **Work in Progress**  
 > This project is actively being developed and is not yet complete.
+
+This project is a Python-powered voice assistant for PCs, designed to recognize spoken commands, provide spoken responses, and execute relevant actions. The project is being actively developed to add new functionality and features and improve accuracy.
+
+NOTE: This voice assistant is primarily designed for Windows. However, most features are compatible with macOS and Linux, and I do plan to make it fully cross-platform in the future.
 
 ## Current Features
 - Voice Recognition: Accurately recognizes spoken commands using a speech recognition library.
