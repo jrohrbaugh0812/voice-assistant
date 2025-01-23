@@ -8,6 +8,7 @@ import qrcode
 from PIL import Image
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from comtypes import CLSCTX_ALL
+import screen_brightness_control as sbc
 
 
 def text_to_speech(text):
@@ -171,11 +172,23 @@ def adjust_volume(level=None):
         interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
         volume = interface.QueryInterface(IAudioEndpointVolume)
 
-        # Validate the level input and adjust volume
+        # Validate the level input and adjust volume (this takes a number from 0.0 to 1.0)
         if level is not None and 0 <= level <= 100:
             volume.SetMasterVolumeLevelScalar(level / 100, None)
-            return f"Volume successfully set to {int(level)}%"
+            return f"Volume successfully set to {int(level)}%."
         else:
-            return "Error: Volume level must be between 0% and 100%"
+            return "Error: Volume level must be between 0% and 100%."
     except Exception as e:
         return f"An error occurred while adjusting the volume: {e}"
+
+
+def adjust_brightness(level=None):
+    try:
+        # Validate the level input and adjust volume (takes a number from 0 to 100)
+        if level is not None and 0 <= level <= 100:
+            sbc.set_brightness(level)
+            return f"Brightness successfully set to {int(level)}%."
+        else:
+            return "Error: Brightness level must be between 0% and 100%."
+    except Exception as e:
+        return f"An error occurred while adjusting the brightness: {e}"
