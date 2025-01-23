@@ -20,6 +20,7 @@ INTENT_KEYWORDS = {
     "image_format": ["image format", "format of image", "change the format of this image", "change image format",
                      "image extension"],
     "volume": ["change volume", "volume", "volume level", "volume amount"],
+    "brightness": ["change brightness", "brightness", "brightness level", "brightness amount"],
     "end": ["bye", "quit", "exit", "goodbye", "later"],
 }
 
@@ -30,6 +31,7 @@ INTENT_PRIORITY = [
     "weather",
     "news",
     "volume",
+    "brightness",
     "qr_code",
     "image_format",
     "time_query",

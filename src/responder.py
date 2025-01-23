@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from intents import get_intent
 from recognizer import (recognize_save_note, recognize_email_body, recognize_email_subject)
 from utils import (text_to_speech, get_time, get_password, get_forecast, get_news, get_joke, generate_qr_code,
-                   convert_image_format, adjust_volume)
+                   convert_image_format, adjust_volume, adjust_brightness)
 
 
 def greet():
@@ -182,6 +182,25 @@ def change_volume():
         return f"An unexpected error occurred: {e}"
 
 
+def change_brightness():
+    try:
+        brightness_level = input("What do you want to set your brightness to? ")
+        if brightness_level.endswith("%"):
+            brightness_level = brightness_level.replace("%", "")
+
+        # Convert the input to an integer
+        brightness_level = int(brightness_level)
+
+        if not (0 <= brightness_level <= 100):
+            raise ValueError("Invalid brightness level. The brightness level must be an integer")
+
+        return adjust_brightness(brightness_level)
+    except ValueError as ve:
+        return f"Input Error: {ve}"
+    except Exception as e:
+        return f"An unexpected error occurred: {e}"
+
+
 def quit_program():
     regards = ["Goodbye, have a nice day!", "Have a good day!", "Bye, have a great day!"]
     return random.choice(regards)
@@ -201,6 +220,7 @@ COMMANDS = {
     "qr_code": fetch_qr_code,
     "image_format": change_image_format,
     "volume": change_volume,
+    "brightness": change_brightness,
     "end": quit_program,
 }
 
