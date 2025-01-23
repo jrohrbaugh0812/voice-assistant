@@ -8,7 +8,6 @@ import qrcode
 from PIL import Image
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from comtypes import CLSCTX_ALL
-import ctypes
 
 
 def text_to_speech(text):

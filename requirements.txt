@@ -8,3 +8,4 @@ feedparser
 qrcode
 pillow
 pycaw
+comtypes
